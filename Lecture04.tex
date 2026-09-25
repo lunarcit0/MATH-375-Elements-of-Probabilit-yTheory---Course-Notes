@@ -1,0 +1,225 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+
+\title{MATH 375: Probability Theory}
+\author{Mariana Restrepo}
+\date{Fall 2026}
+
+\begin{document}
+\maketitle
+
+\begin{center}
+\large Lecture 4
+\end{center}
+
+\tableofcontents
+
+\section{Lecture 4: Conditional Probability and Bayes' Formula}
+
+\subsection{The birthday paradox}
+
+Suppose $n$ people have birthdays that are independent and equally
+likely to fall on any of 365 days. We ignore February 29.
+
+It is easiest to count the event that \emph{everyone has a different
+birthday}. The first person can have any birthday. The second must
+choose one of 364 remaining days, the third one of 363, and so on:
+\[
+P(\text{all birthdays different})
+=
+\frac{365}{365}
+\cdot\frac{364}{365}
+\cdot\frac{363}{365}
+\cdots
+\frac{365-n+1}{365},
+\qquad n\leq365.
+\]
+
+Thus, by the complement rule,
+\[
+\boxed{
+P(\text{at least two birthdays match})
+=
+1-
+\frac{365\cdot364\cdots(365-n+1)}{365^n}.
+}
+\]
+With 23 people, the probability of a shared birthday is greater
+than $\tfrac12$.
+
+\subsection{Mutually exclusive events}
+
+Suppose $A$ and $B$ cannot occur together, with
+$P(A)=0.3$ and $P(B)=0.5$. Since $A\cap B=\varnothing$,
+\[
+P(A\cup B)=P(A)+P(B)=0.8.
+\]
+Also,
+\[
+P(A\cap B^c)=P(A)=0.3,
+\qquad
+P(A\cap B)=0.
+\]
+The event $A$ already guarantees that $B$ does not occur.
+
+\subsection{Example: which die is larger?}
+
+Roll two distinguishable fair dice. There are $36$ equally likely
+ordered outcomes.
+
+Six outcomes are ties, so
+\[
+P(\text{tie})=\frac{6}{36}=\frac16.
+\]
+The remaining outcomes split evenly between ``first die is larger''
+and ``second die is larger.'' Therefore,
+\[
+\boxed{
+P(\text{second die is larger})
+=\frac{1-P(\text{tie})}{2}
+=\frac{5}{12}.
+}
+\]
+
+\subsection{Drawing two cards}
+
+Draw two cards from a standard 52-card deck, without replacement.
+Because the order does not matter for these questions, the sample
+space has $\binom{52}{2}$ equally likely pairs.
+
+\paragraph{Both cards are aces.}
+Choose both cards from the four aces:
+\[
+\boxed{
+P(\text{both aces})
+=\frac{\binom{4}{2}}{\binom{52}{2}}.
+}
+\]
+
+\paragraph{Both cards have the same rank.}
+Choose one of the 13 ranks, then choose two of its four suits:
+\[
+\boxed{
+P(\text{same rank})
+=\frac{13\binom{4}{2}}{\binom{52}{2}}.
+}
+\]
+
+\subsection{Example: red socks}
+
+A drawer has $n$ socks, three of which are red. If two socks are
+selected uniformly without replacement and the probability that
+both are red is $\tfrac12$, find $n$.
+
+There are $\binom{3}{2}$ favorable pairs out of $\binom{n}{2}$
+possible pairs:
+\[
+\frac{\binom{3}{2}}{\binom{n}{2}}=\frac12.
+\]
+Since $\binom{3}{2}=3$ and
+$\binom{n}{2}=\frac{n(n-1)}{2}$,
+\[
+\frac{6}{n(n-1)}=\frac12
+\quad\Longrightarrow\quad
+n(n-1)=12.
+\]
+The positive solution is
+\[
+\boxed{n=4.}
+\]
+
+\subsection{Conditional probability}
+
+The phrase \textbf{``given $A$''} tells us to restrict attention to
+outcomes in $A$. If $P(A)>0$, the probability of $B$ given $A$ is
+\[
+\boxed{
+P(B\mid A)=\frac{P(A\cap B)}{P(A)}.
+}
+\]
+Equivalently, the multiplication rule is
+\[
+P(A\cap B)=P(A)P(B\mid A).
+\]
+
+\paragraph{Example: two coin flips.}
+Flip a fair coin twice. Let
+\[
+A=\{\text{first flip is heads}\},\qquad
+B=\{\text{second flip is heads}\}.
+\]
+The four equally likely outcomes are
+\[
+HH,\ HT,\ TH,\ TT.
+\]
+
+Given $A$, only $HH$ and $HT$ remain. Of these two outcomes,
+$HH$ has both flips heads. Hence
+\[
+P(B\mid A)
+=\frac{P(A\cap B)}{P(A)}
+=\frac{1/4}{1/2}
+=\boxed{\frac12}.
+\]
+
+Now suppose instead we are given that \emph{at least one flip is
+heads}. Only $HH$, $HT$, and $TH$ remain. Exactly one of these
+has both flips heads, so
+\[
+\boxed{
+P(\text{both heads}\mid\text{at least one head})=\frac13.
+}
+\]
+
+\subsection{Bayes' formula}
+
+The multiplication rule can be written in either order:
+\[
+P(A\cap B)=P(A)P(B\mid A)=P(B)P(A\mid B).
+\]
+Solving for $P(A\mid B)$ gives \textbf{Bayes' formula}:
+\[
+\boxed{
+P(A\mid B)=\frac{P(A)P(B\mid A)}{P(B)},
+\qquad P(B)>0.
+}
+\]
+
+\subsection{Example: knowing versus guessing}
+
+A student either knows an answer or guesses. Let
+\[
+K=\{\text{student knows the answer}\},\qquad
+C=\{\text{student answers correctly}\}.
+\]
+Suppose $P(K)=p$. If the student knows, the answer is correct.
+If the student guesses among $m$ choices, the answer is correct
+with probability $1/m$. Thus,
+\[
+P(C\mid K)=1,\qquad
+P(C\mid K^c)=\frac1m.
+\]
+
+A correct answer can come from either knowing or guessing:
+\[
+\begin{aligned}
+P(C)
+&=P(K)P(C\mid K)
+ +P(K^c)P(C\mid K^c)\\
+&=p+\frac{1-p}{m}.
+\end{aligned}
+\]
+Bayes' formula now gives the probability that the student knew
+the answer, \emph{given that the answer was correct}:
+\[
+\boxed{
+P(K\mid C)
+=
+\frac{p}{p+(1-p)/m}
+=
+\frac{mp}{mp+1-p}.
+}
+\]
+
+\end{document}

@@ -1,0 +1,205 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+
+\title{MATH 375: Probability Theory}
+\author{Mariana Restrepo}
+\date{Fall 2026}
+
+\begin{document}
+\maketitle
+
+\begin{center}
+\large Lecture 6
+\end{center}
+
+\tableofcontents
+
+\section{Lecture 6: Independence and Repeated Trials}
+
+\subsection{Independence and complements}
+
+Events $E$ and $F$ are independent when
+\[
+P(E\cap F)=P(E)P(F).
+\]
+
+If $E$ and $F$ are independent, then $E$ and $F^c$ are also
+independent. To see why, split $E$ into disjoint pieces:
+\[
+E=(E\cap F)\cup(E\cap F^c).
+\]
+Consequently,
+\[
+\begin{aligned}
+P(E\cap F^c)
+&=P(E)-P(E\cap F)\\
+&=P(E)-P(E)P(F)\\
+&=P(E)\bigl(1-P(F)\bigr)\\
+&=P(E)P(F^c).
+\end{aligned}
+\]
+This is exactly the condition for $E$ and $F^c$ to be independent.
+
+\subsection{Independence of three events}
+
+Three events $E$, $F$, and $G$ are \textbf{mutually independent}
+when all four conditions hold:
+\[
+\begin{aligned}
+P(E\cap F)&=P(E)P(F),\\
+P(E\cap G)&=P(E)P(G),\\
+P(F\cap G)&=P(F)P(G),\\
+P(E\cap F\cap G)&=P(E)P(F)P(G).
+\end{aligned}
+\]
+Checking only the three pairs is not enough to establish mutual
+independence.
+
+\subsection{Repeated independent trials}
+
+Suppose each trial independently succeeds with probability $p$.
+Then each trial fails with probability $1-p$.
+
+\paragraph{At least one success in $n$ trials.}
+The complement is ``all $n$ trials fail,'' with probability
+$(1-p)^n$. Therefore,
+\[
+\boxed{
+P(\text{at least one success})=1-(1-p)^n.
+}
+\]
+
+\paragraph{Exactly $k$ successes in $n$ trials.}
+First choose which $k$ positions contain successes. For any
+particular choice of positions, independence gives probability
+$p^k(1-p)^{n-k}$. Hence
+\[
+\boxed{
+P(\text{exactly $k$ successes})
+=\binom{n}{k}p^k(1-p)^{n-k}.
+}
+\]
+
+\subsection{Which dice sum appears first?}
+
+Independently roll two fair dice until either a sum of 5 or a
+sum of 7 appears. What is the probability that 5 appears first?
+
+In one roll,
+\[
+P(\text{sum 5})=\frac4{36},\qquad
+P(\text{sum 7})=\frac6{36}.
+\]
+The probability of getting neither is
+\[
+1-\frac4{36}-\frac6{36}=\frac{26}{36}.
+\]
+
+For 5 to appear for the first time on roll $n$ before any 7,
+the first $n-1$ rolls must be neither 5 nor 7, followed by a 5:
+\[
+P(\text{first qualifying result is 5 on roll $n$})
+=
+\left(\frac{26}{36}\right)^{n-1}\frac4{36}.
+\]
+Add over all possible values of $n$:
+\[
+\begin{aligned}
+P(\text{5 before 7})
+&=\sum_{n=1}^{\infty}
+\left(\frac{26}{36}\right)^{n-1}\frac4{36}\\
+&=\frac{4/36}{1-26/36}\\
+&=\boxed{\frac25}.
+\end{aligned}
+\]
+
+\subsection{Three distinguishable dice}
+
+Roll a blue die $B$, a yellow die $Y$, and a red die $R$.
+What is the probability that
+\[
+B<Y<R?
+\]
+
+For the values to be strictly increasing, they must first be
+\emph{distinct}. Choose any three of the six faces. Once chosen,
+exactly one arrangement places them in the order $B<Y<R$:
+\[
+\#\{\text{favorable outcomes}\}=\binom63=20.
+\]
+There are $6^3=216$ possible ordered outcomes, so
+\[
+\boxed{
+P(B<Y<R)=\frac{\binom63}{6^3}
+=\frac{20}{216}
+=\frac5{54}.
+}
+\]
+
+\subsection{Example: rain and lateness}
+
+Suppose it rains tomorrow with probability $0.7$. Joe is late with
+probability $0.3$ on rainy days and $0.1$ on nonrainy days.
+
+Let $R$ mean ``rain'' and $L$ mean ``Joe is late.'' By the law of
+total probability,
+\[
+\begin{aligned}
+P(L)
+&=P(R)P(L\mid R)+P(R^c)P(L\mid R^c)\\
+&=(0.7)(0.3)+(0.3)(0.1)\\
+&=\boxed{0.24}.
+\end{aligned}
+\]
+
+Now suppose Joe was \emph{early}, meaning he was not late. What is
+the probability that it rained? First,
+\[
+P(L^c)=1-0.24=0.76,
+\qquad
+P(L^c\mid R)=1-0.3=0.7.
+\]
+Bayes' formula gives
+\[
+\boxed{
+P(R\mid L^c)
+=\frac{P(R)P(L^c\mid R)}{P(L^c)}
+=\frac{(0.7)(0.7)}{0.76}
+=\frac{49}{76}.
+}
+\]
+
+\subsection{Example: selecting a coin}
+
+A box holds three coins: a two-headed coin, a fair coin, and a
+biased coin that lands heads with probability $\tfrac34$.
+One coin is chosen uniformly and flipped. Given that the result
+is heads, what is the probability that the two-headed coin
+was chosen?
+
+Let $T$, $F$, and $D$ denote the three coin types, and let $H$
+mean ``heads.'' Each coin is chosen with probability $\tfrac13$.
+The law of total probability gives
+\[
+\begin{aligned}
+P(H)
+&=P(T)P(H\mid T)
+ +P(F)P(H\mid F)
+ +P(D)P(H\mid D)\\
+&=\frac13(1)+\frac13\left(\frac12\right)
+  +\frac13\left(\frac34\right)\\
+&=\frac34.
+\end{aligned}
+\]
+Therefore,
+\[
+\boxed{
+P(T\mid H)
+=\frac{P(T)P(H\mid T)}{P(H)}
+=\frac{(1/3)(1)}{3/4}
+=\frac49.
+}
+\]
+
+\end{document}

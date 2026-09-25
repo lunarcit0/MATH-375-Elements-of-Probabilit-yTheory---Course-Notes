@@ -1,0 +1,150 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+
+\title{Notes on MATH 375: Probability Theory}
+\author{Mariana Restrepo}
+\date{Fall 2026}
+
+\begin{document}
+\maketitle
+
+\begin{center}
+\large Lecture 2
+\end{center}
+
+\tableofcontents
+
+\section{Lecture 2: Counting and Probability}
+
+\subsection{Permutations with repeated objects}
+
+If $n$ objects include groups of identical objects, arranging all
+$n$ positions gives $n!$ orderings, but swapping identical objects
+does not create a new arrangement. Divide by the factorial of each
+group size.
+
+\paragraph{Example: SUCCESS.}
+The word SUCCESS has seven letters: three S's, two C's, one U, and
+one E. The number of distinct arrangements is
+\[
+\frac{7!}{3!\,2!\,1!\,1!}=420.
+\]
+
+\subsection{Combinations}
+
+A \textbf{combination} selects objects without regard to their order.
+The number of ways to choose $r$ objects from $n$ distinct objects is
+\[
+\binom{n}{r}
+=\frac{n!}{r!(n-r)!}.
+\]
+Here $n$ is the number available and $r$ is the number chosen.
+
+For example,
+\[
+\binom{5}{3}=\frac{5!}{3!\,2!}=10.
+\]
+Choosing the three objects to include is equivalent to choosing the
+two objects to leave out, so
+\[
+\binom{n}{r}=\binom{n}{n-r}.
+\]
+
+\paragraph{Example: a required letter.}
+How many ways can we select eight letters from the English alphabet
+if A must be included? A is already selected, so choose the other
+seven letters from the remaining 25:
+\[
+\boxed{\binom{25}{7}}.
+\]
+
+\paragraph{Example: exactly three zeros.}
+A bit string of length 10 with exactly three zeros is determined by
+the three positions containing zeros:
+\[
+\binom{10}{3}=120.
+\]
+
+\paragraph{Example: at least three zeros.}
+Start with all bit strings of length 10. Exclude those with zero,
+one, or two zeros:
+\[
+\begin{aligned}
+\#(\text{at least three zeros})
+&=2^{10}
+ -\left[\binom{10}{0}+\binom{10}{1}+\binom{10}{2}\right]\\
+&=1024-(1+10+45)\\
+&=\boxed{968}.
+\end{aligned}
+\]
+This is the \textbf{complement method}: count everything, then
+subtract the cases that fail the condition.
+
+\subsection{Sample spaces and events}
+
+The \textbf{sample space} $S$ is the set of all possible outcomes.
+An \textbf{event} $E$ is a subset of $S$: the outcomes that satisfy
+a particular condition.
+
+When all outcomes in a finite sample space are equally likely,
+\[
+P(E)=\frac{|E|}{|S|}
+=\frac{\text{number of favorable outcomes}}
+       {\text{number of possible outcomes}}.
+\]
+The denominator must count the outcomes in the sample space, not
+just the outcomes in the event.
+
+\paragraph{Example: rolling a die.}
+For a fair six-sided die,
+\[
+S=\{1,2,3,4,5,6\}.
+\]
+Let $E$ be the event ``the result is odd.'' Then
+\[
+E=\{1,3,5\},
+\qquad
+P(E)=\frac{|E|}{|S|}=\frac{3}{6}=\frac12.
+\]
+
+\subsection{Basic probability rules}
+
+For every event $E$,
+\[
+0\leq P(E)\leq 1.
+\]
+
+The probability of the entire sample space is
+\[
+P(S)=1.
+\]
+
+If $E$ and $F$ are \textbf{mutually exclusive}, they cannot occur
+together: $E\cap F=\varnothing$. In that case,
+\[
+P(E\cup F)=P(E)+P(F).
+\]
+
+\subsection{Union, intersection, and complement}
+
+$E\cup F$ means \textbf{E or F or both} occur.
+
+$E\cap F$ means \textbf{E and F} occur together.
+
+The complement $E^c$ means \textbf{E does not occur}. Since $E$
+and $E^c$ are mutually exclusive and together make up $S$,
+\[
+P(E)+P(E^c)=1.
+\]
+Therefore, the \textbf{complement rule} is
+\[
+\boxed{P(E^c)=1-P(E)}.
+\]
+
+For example, if $P(E)=\frac16$, then
+\[
+P(E^c)=1-\frac16=\frac56.
+\]
+
+\end{document}

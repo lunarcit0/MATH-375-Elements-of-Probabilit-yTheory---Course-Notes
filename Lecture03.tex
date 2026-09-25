@@ -1,0 +1,185 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+
+\title{MATH 375: Probability Theory}
+\author{Mariana Restrepo}
+\date{Fall 2026}
+
+\begin{document}
+\maketitle
+
+\begin{center}
+\large Lecture 3
+\end{center}
+
+\tableofcontents
+
+\section{Lecture 3: Events and Counting Probabilities}
+
+\subsection{Reading event notation}
+
+Let $E$ and $F$ be events. Then:
+\[
+\begin{array}{ll}
+E\cup F & \text{$E$ occurs, $F$ occurs, or both occur},\\[2pt]
+E\cap F & \text{both $E$ and $F$ occur},\\[2pt]
+E^c & \text{$E$ does not occur}.
+\end{array}
+\]
+
+Two useful probability rules are
+\[
+P(E^c)=1-P(E)
+\]
+and
+\[
+P(E\cup F)=P(E)+P(F)-P(E\cap F).
+\]
+The intersection is subtracted because it was counted once in
+$P(E)$ and again in $P(F)$.
+
+We can also split $F$ into two nonoverlapping pieces:
+\[
+F=(F\cap E)\cup(F\cap E^c).
+\]
+Consequently,
+\[
+P(F)=P(F\cap E)+P(F\cap E^c).
+\]
+
+\subsection{When one event is contained in another}
+
+We write $E\subseteq F$ when every outcome in $E$ is also in $F$.
+For example, when rolling a die, the event ``roll a 6'' is contained
+in the event ``roll an even number.''
+
+If $E\subseteq F$, then $E\cap F=E$. Using the previous rule,
+\[
+\begin{aligned}
+P(F)
+&=P(F\cap E)+P(F\cap E^c)\\
+&=P(E)+P(F\cap E^c)\\
+&\geq P(E).
+\end{aligned}
+\]
+Therefore,
+\[
+\boxed{E\subseteq F\quad\Longrightarrow\quad P(E)\leq P(F).}
+\]
+
+\subsection{Example: liking neither book}
+
+Jane likes the first book with probability $0.5$, the second with
+probability $0.4$, and both with probability $0.3$.
+
+Let $A$ mean ``likes the first book'' and $B$ mean ``likes the
+second book.'' The event ``likes neither'' is $(A\cup B)^c$.
+First find
+\[
+P(A\cup B)=P(A)+P(B)-P(A\cap B)
+=0.5+0.4-0.3=0.6.
+\]
+Then use the complement:
+\[
+\boxed{P\bigl((A\cup B)^c\bigr)=1-0.6=0.4.}
+\]
+
+\subsection{Equally likely outcomes}
+
+If every outcome in a finite sample space $S$ is equally likely,
+then for an event $E$,
+\[
+P(E)=\frac{|E|}{|S|}.
+\]
+
+\paragraph{Example: two dice.}
+Two distinguishable fair dice have $6\cdot6=36$ ordered outcomes.
+The outcomes whose sum is 6 are
+\[
+(1,5),\ (2,4),\ (3,3),\ (4,2),\ (5,1).
+\]
+There are five favorable outcomes, so
+\[
+\boxed{P(\text{sum is 6})=\frac{5}{36}.}
+\]
+
+\subsection{Example: selecting a committee}
+
+Select five people uniformly from a group of six men and nine women.
+What is the probability of selecting exactly three men and two women?
+
+There are $\binom{15}{5}$ possible committees. For a favorable
+committee, choose three of the six men and two of the nine women:
+\[
+|E|=\binom{6}{3}\binom{9}{2}.
+\]
+Thus,
+\[
+\boxed{
+P(E)=\frac{\binom{6}{3}\binom{9}{2}}{\binom{15}{5}}
+=\frac{240}{1001}.
+}
+\]
+
+\subsection{Example: a five-card straight}
+
+A five-card hand is a \textbf{straight} if its ranks are consecutive
+and its cards are not all of the same suit. Aces may be low
+($A,2,3,4,5$) or high ($10,J,Q,K,A$), giving ten possible rank
+sequences.
+
+For each sequence, there are $4^5$ choices of suits. Exclude the
+four choices where all five cards have the same suit. Therefore,
+\[
+|E|=10(4^5-4).
+\]
+Since there are $\binom{52}{5}$ five-card hands,
+\[
+\boxed{
+P(\text{straight})
+=\frac{10(4^5-4)}{\binom{52}{5}}.
+}
+\]
+
+\subsection{Example: bridge hands}
+
+In bridge, four labeled players each receive 13 cards.
+
+\paragraph{One specified player receives all 13 spades.}
+There are $\binom{52}{13}$ possible hands for that player, and only
+one contains all the spades. Hence
+\[
+P(\text{player 1 gets all spades})
+=\frac{1}{\binom{52}{13}}.
+\]
+
+\paragraph{Any one player receives all 13 spades.}
+The four possible recipients give mutually exclusive events, so
+\[
+\boxed{
+P(\text{some player gets all spades})
+=\frac{4}{\binom{52}{13}}.
+}
+\]
+
+\paragraph{Each player receives exactly one ace.}
+The number of ways to deal 52 cards to four labeled players is
+\[
+|S|=\frac{52!}{(13!)^4}.
+\]
+
+First assign the four distinct aces, one to each player, in $4!$
+ways. Then divide the 48 non-ace cards into four groups of 12:
+\[
+|E|=4!\frac{48!}{(12!)^4}.
+\]
+Therefore,
+\[
+\boxed{
+P(\text{one ace per player})
+=\frac{4!\,48!/(12!)^4}{52!/(13!)^4}.
+}
+\]
+
+\end{document}

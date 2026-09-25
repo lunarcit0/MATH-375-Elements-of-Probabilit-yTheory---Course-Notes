@@ -1,0 +1,198 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+
+\title{MATH 375: Probability Theory}
+\author{Mariana Restrepo}
+\date{Fall 2026}
+
+\begin{document}
+\maketitle
+
+\begin{center}
+\large Lecture 5
+\end{center}
+
+\tableofcontents
+
+\section{Lecture 5: Multiplication, Total Probability, and Independence}
+
+\subsection{The multiplication rule}
+
+For events $A$ and $B$, provided $P(A)>0$,
+\[
+P(A\cap B)=P(A)P(B\mid A).
+\]
+
+The rule extends to several events. For example,
+\[
+\begin{aligned}
+P(E_1\cap E_2\cap E_3)
+={}&P(E_1)\,
+P(E_2\mid E_1)\,
+P(E_3\mid E_1\cap E_2).
+\end{aligned}
+\]
+In general, each new factor is conditioned on all the events
+already listed before it.
+
+\subsection{Example: separating four aces}
+
+A shuffled deck is divided into four labeled piles of 13 cards.
+What is the probability that every pile contains exactly one ace?
+
+Imagine placing the four aces into piles one at a time. The first
+ace can go into any pile. For the other three aces to go into
+different piles, their choices must differ from the earlier ones:
+\[
+\begin{aligned}
+P(\text{one ace in each pile})
+&=1\cdot\frac34\cdot\frac24\cdot\frac14\\
+&=\boxed{\frac{3}{32}}.
+\end{aligned}
+\]
+
+\subsection{The law of total probability}
+
+Suppose $F_1,\ldots,F_n$ are mutually exclusive events whose union
+is the whole sample space. They form a \textbf{partition}: exactly
+one of them occurs.
+
+Any event $E$ can be split into disjoint pieces:
+\[
+E=(E\cap F_1)\cup\cdots\cup(E\cap F_n).
+\]
+Adding the probabilities of those pieces gives
+\[
+\boxed{
+P(E)=\sum_{i=1}^{n}P(F_i)P(E\mid F_i).
+}
+\]
+
+\subsection{Example: choosing a coin}
+
+A box contains two type A coins and one type B coin. A type A coin
+lands heads with probability $\tfrac14$, while a type B coin lands
+heads with probability $\tfrac34$. One coin is selected uniformly
+and flipped. Given that it lands heads, what is the probability
+that it was type A?
+
+Let $A$ mean ``type A was selected,'' $B$ mean ``type B was
+selected,'' and $H$ mean ``the flip is heads.'' Then
+\[
+P(A)=\frac23,\qquad P(B)=\frac13,
+\]
+and
+\[
+P(H\mid A)=\frac14,\qquad P(H\mid B)=\frac34.
+\]
+
+First, total probability gives
+\[
+\begin{aligned}
+P(H)
+&=P(A)P(H\mid A)+P(B)P(H\mid B)\\
+&=\frac23\cdot\frac14+\frac13\cdot\frac34\\
+&=\frac16+\frac14=\frac5{12}.
+\end{aligned}
+\]
+Now apply Bayes' formula:
+\[
+\boxed{
+P(A\mid H)
+=\frac{P(A)P(H\mid A)}{P(H)}
+=\frac{1/6}{5/12}
+=\frac25.
+}
+\]
+
+\subsection{Example: at least one girl}
+
+Assume each child is independently equally likely to be a boy or
+a girl. For a two-child family, use ordered outcomes:
+\[
+S=\{BB,BG,GB,GG\}.
+\]
+Given that \emph{at least one child is a girl}, the remaining
+equally likely possibilities are $BG$, $GB$, and $GG$. In only one
+of these are both children girls. Therefore,
+\[
+\boxed{
+P(\text{both girls}\mid\text{at least one girl})=\frac13.
+}
+\]
+The wording of the given information determines which outcomes
+remain in the sample space.
+
+\subsection{Example: a girl born on Tuesday}
+
+Assume birth sex and weekday are independent and equally likely.
+Suppose we are told that \emph{at least one of two children is a
+girl born on Tuesday}. What is the probability that both children
+are girls?
+
+For one child, the probability of \emph{not} being a girl born on
+Tuesday is $13/14$. Thus,
+\[
+P(\text{at least one girl born Tuesday})
+=1-\left(\frac{13}{14}\right)^2
+=\frac{27}{196}.
+\]
+
+For both children to be girls and at least one to have been born
+on Tuesday, consider their two birth weekdays. There are $7^2$
+pairs of weekdays, of which $6^2$ have no Tuesday:
+\[
+P(\text{both girls and at least one Tuesday girl})
+=\frac14\left(1-\frac{6^2}{7^2}\right)
+=\frac{13}{196}.
+\]
+Therefore,
+\[
+\boxed{
+P(\text{both girls}\mid\text{at least one Tuesday girl})
+=\frac{13/196}{27/196}
+=\frac{13}{27}.
+}
+\]
+
+\subsection{Independent events}
+
+Events $A$ and $B$ are \textbf{independent} if
+\[
+\boxed{P(A\cap B)=P(A)P(B).}
+\]
+If $P(A)>0$, this is equivalent to
+\[
+P(B\mid A)=P(B).
+\]
+Knowing whether $A$ occurred does not change the probability of $B$.
+
+\paragraph{Example: two dice.}
+Let $F$ mean ``the first die shows 4,'' so $P(F)=1/6$.
+
+Let $E_5$ mean ``the sum is 5.'' There are five ways to get a sum
+of 5, and only $(4,1)$ also belongs to $F$. Thus,
+\[
+P(E_5)=\frac5{36},\qquad
+P(E_5\cap F)=\frac1{36},
+\]
+but
+\[
+P(E_5)P(F)=\frac5{216}\ne\frac1{36}.
+\]
+So $E_5$ and $F$ are \textbf{dependent}.
+
+Now let $E_7$ mean ``the sum is 7.'' There are six ways to get
+a sum of 7, and only $(4,3)$ also belongs to $F$:
+\[
+P(E_7)=\frac6{36}=\frac16,\qquad
+P(E_7\cap F)=\frac1{36}.
+\]
+This time,
+\[
+P(E_7)P(F)=\frac16\cdot\frac16=\frac1{36},
+\]
+so $E_7$ and $F$ are \textbf{independent}.
+
+\end{document}

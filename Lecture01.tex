@@ -1,0 +1,171 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+
+\title{Course Notes for MATH 375: Probability Theory}
+\author{Mariana Restrepo}
+\date{Fall 2026}
+
+\begin{document}
+\maketitle
+
+\begin{center}
+\large Lecture 1
+\end{center}
+
+\tableofcontents
+
+\section{Lecture 1: Sets and Counting}
+
+\subsection{Union and intersection}
+
+The \textbf{union} $A\cup B$ contains every element that belongs to
+$A$, to $B$, or to both:
+\[
+A\cup B=\{x:x\in A\text{ or }x\in B\}.
+\]
+
+The \textbf{intersection} $A\cap B$ contains the elements shared by
+both sets:
+\[
+A\cap B=\{x:x\in A\text{ and }x\in B\}.
+\]
+
+For example, if
+\[
+A=\{1,2,5,7\}, \qquad B=\{2,3,6,8\},
+\]
+then
+\[
+A\cup B=\{1,2,3,5,6,7,8\},
+\qquad
+A\cap B=\{2\}.
+\]
+
+\subsection{Special sets and set properties}
+
+The \textbf{universal set} $U$ contains all elements under discussion.
+The \textbf{empty set} $\varnothing$ contains no elements.
+
+Some useful identities are
+\[
+\begin{aligned}
+A\cup B &= B\cup A, & A\cap B &= B\cap A,\\
+A\cup\varnothing &= A, & A\cap\varnothing &= \varnothing,\\
+A\cup U &= U, & A\cap U &= A.
+\end{aligned}
+\]
+
+The distributive laws are
+\[
+(A\cup B)\cap C=(A\cap C)\cup(B\cap C)
+\]
+and
+\[
+(A\cap B)\cup C=(A\cup C)\cap(B\cup C).
+\]
+
+\subsection{Complements and De Morgan's laws}
+
+The \textbf{complement} $A^c$ contains the elements of $U$ that are
+not in $A$:
+\[
+A^c=\{x\in U:x\notin A\}.
+\]
+
+De Morgan's laws are
+\[
+(A\cup B)^c=A^c\cap B^c,
+\qquad
+(A\cap B)^c=A^c\cup B^c.
+\]
+
+\subsection{Cardinality and inclusion--exclusion}
+
+For a finite set $A$, its \textbf{cardinality} $|A|$ is its number
+of elements. To count the elements in a union, use
+\[
+|A\cup B|=|A|+|B|-|A\cap B|.
+\]
+We subtract $|A\cap B|$ because adding $|A|$ and $|B|$ counts
+the shared elements twice.
+
+For three sets,
+\[
+\begin{aligned}
+|A\cup B\cup C|
+={}&|A|+|B|+|C|\\
+&-|A\cap B|-|A\cap C|-|B\cap C|\\
+&+|A\cap B\cap C|.
+\end{aligned}
+\]
+
+\subsection{The multiplication principle}
+
+If a task has several successive choices, multiply the number of
+options at each step.
+
+\paragraph{Bit strings.}
+Each position in a bit string can be either $0$ or $1$. Therefore,
+the number of bit strings of length $n$ is
+\[
+\underbrace{2\cdot2\cdots2}_{n\text{ positions}}=2^n.
+\]
+
+\paragraph{License plates.}
+Suppose a plate has four digits followed by three letters, and
+repetition is allowed. There are
+\[
+10^4\cdot26^3
+\]
+possible plates.
+
+If the four digits must be distinct and the three letters must be
+distinct, the count becomes
+\[
+(10\cdot9\cdot8\cdot7)(26\cdot25\cdot24)
+=78{,}624{,}000.
+\]
+
+\paragraph{Area codes.}
+If an area code has three digits and its first digit cannot be $0$
+or $1$, while the other digits have no restrictions, there are
+\[
+8\cdot10\cdot10=800
+\]
+possible area codes.
+
+\subsection{Choosing positions: combinations}
+
+How many bit strings of length $n$ have exactly one $0$?
+Choose its position. There are $n$ choices.
+
+How many have exactly two $0$s? Choose two of the $n$ positions:
+\[
+\binom{n}{2}
+=\frac{n!}{2!(n-2)!}
+=\frac{n(n-1)}{2}.
+\]
+
+For instance, with $n=5$,
+\[
+\binom{5}{2}=10.
+\]
+
+\textbf{Decision cue:} When identical special objects must occupy
+certain positions, choose the positions. You do not need to arrange
+the remaining identical objects separately.
+
+\subsection{Permutations}
+
+A \textbf{permutation} of $n$ distinct objects is an ordering of
+all $n$ objects. The number of such orderings is
+\[
+n(n-1)(n-2)\cdots2\cdot1=n!.
+\]
+
+\textbf{Decision cue:} If changing the order creates a different
+outcome, think about permutations. If you only need to select which
+positions or objects are involved, think about combinations.
+
+\end{document}
